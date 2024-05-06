@@ -7,7 +7,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 
 # Create your views here.
-def login(request):
+def inicio(request):
    # return render(request, 'login.html')
     if request.method=="POST":
         form = AuthenticationForm(request, data=request.POST)
@@ -18,7 +18,7 @@ def login(request):
             if usuario is not None:
                 login(request, usuario)
                 # reset(username=username)
-                return redirect('home')
+                return redirect('Home')
             else:
                 messages.error(request,"Usuario no válido")
         else:
@@ -29,8 +29,8 @@ def login(request):
 
 
 
-def registro(request):
-    return render(request, 'registro.html')
+def register(request):
+    return render(request, 'register.html')
 
 def create_user(request):
     if request.method == 'POST':
@@ -70,7 +70,7 @@ def create_user(request):
 
         # Redirigir a la página de inicio después del registro exitoso
         messages.success(request, '¡Creación exitosa! Ya puedes ingresar')
-        return redirect('login')
+        return redirect('inicio')
 
     # Si el método de solicitud no es POST, simplemente renderiza la página de registro
     return render(request, 'register.html')
